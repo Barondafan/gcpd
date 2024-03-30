@@ -1,6 +1,6 @@
 class UnitsController < ApplicationController
     before_action :set_unit, only: [:show, :edit, :update, :destroy]
-    before_action :check_login
+    before_action :check_login #needed
     authorize_resource
     
     def index
@@ -9,7 +9,7 @@ class UnitsController < ApplicationController
     end
 
     def show
-        @current_officers = @unit.officers.alphabetical.active.to_a
+        @officers = @unit.officers.alphabetical.active.to_a
     end
 
     def new
@@ -19,22 +19,46 @@ class UnitsController < ApplicationController
     def create
         @unit = Unit.new(unit_params)
         if @unit.save
-            flash[:notice] = "Successfully added unit."
-            redirect_to @unit
+            flash[:notice] = "Successfully added #{@unit.name} to GCPD."
+            redirect_to units_path
         else
             render action: 'new'
         end
     end
 
     def edit
+        @unit = Unit.find(params[:id])
     end
 
     def update
+        @unit = Unit.find(params[:id])
         if @unit.update(unit_params)
           flash[:notice] = "Successfully updated unit by #{@unit.name}."
           redirect_to @unit
         else
           render action: 'edit'
         end
+    end
+
+    def destroy
+        @unit = Unit.find(params[:id])
+        # @unit.destroy
+        # flash[:notice] = "Removed "
+        # redirect_to unit_path
+        if @unit.destroy
+            flash[:notice] = "Removed #{@unit.name} from the system."
+            redirect_to units_path
+        else
+            render action: 'index'
+        end
+    end
+
+    private
+    def set_unit
+        @unit = Unit.find(params[:id])
+    end
+
+    def unit_params
+        params.require(:unit).permit(:name, :active)
     end
 end

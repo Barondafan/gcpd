@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
     def create
       user = Officer.authenticate(params[:username], params[:password])
       if user
-        session[:officer_id] = officer.id
+        session[:officer_id] = user.id
         redirect_to home_path, notice: "Logged in!"
       else
         flash.now.alert = "Username and/or password is invalid"
