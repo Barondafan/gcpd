@@ -45,6 +45,7 @@ Rails.application.routes.draw do
     resources :crimes
     resources :criminals
     resources :investigations
+    patch 'investigations/:id/close', to: 'investigations#close', as: :close_investigation
   
   
     # Routes for assignments

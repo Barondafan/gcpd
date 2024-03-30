@@ -1,5 +1,5 @@
 class InvestigationsController < ApplicationController
-    before_action :set_investigation, only: [:show, :edit, :update, :destroy]
+    before_action :set_investigation, only: [:show, :edit, :update, :close]
     before_action :check_login #needed
     authorize_resource
     
@@ -12,7 +12,7 @@ class InvestigationsController < ApplicationController
     end
 
     def show
-        @current_assignments = @investigation.assignments.alphabetical.active.to_a
+        @current_assignments = @investigation.assignments.current.by_officer.to_a
     end
 
     def new
@@ -22,8 +22,8 @@ class InvestigationsController < ApplicationController
     def create
         @investigation = Investigation.new(investigation_params)
         if @investigation.save
-            flash[:notice] = "Successfully added #{@investigation.name} to GCPD."
-            redirect_to investigations_path
+            flash[:notice] = "Successfully added '#{@investigation.title}' to GCPD."
+            redirect_to @investigation
         else
             render action: 'new'
         end
@@ -34,34 +34,37 @@ class InvestigationsController < ApplicationController
     end
 
     def update
-        @investigation = Unit.find(params[:id])
-        if @unit.update(unit_params)
-          flash[:notice] = "Successfully updated unit by #{@unit.name}."
-          redirect_to @unit
+        @investigation = Investigation.find(params[:id])
+        if @investigation.update(investigation_params)
+          flash[:notice] = "Successfully updated unit by '#{@investigation.title}'."
+          redirect_to @investigation
         else
           render action: 'edit'
         end
     end
 
-    def destroy
-        @unit = Unit.find(params[:id])
-        # @unit.destroy
-        # flash[:notice] = "Removed "
-        # redirect_to unit_path
-        if @unit.destroy
-            flash[:notice] = "Removed #{@unit.name} from the system."
-            redirect_to units_path
-        else
-            render action: 'index'
-        end
+    def close
+        # @investigation = Investigation.find(params[:id])
+        # # @unit.destroy
+        # # flash[:notice] = "Removed "
+        # # redirect_to unit_path
+        # if @investigation.destroy
+        #     flash[:notice] = "Removed '#{@investigation.title}' from the system."
+        #     redirect_to investigations_path
+        # else
+        #     render action: 'index'
+        # end
+        @investigation.close
+        redirect_to investigations_path, notice: "Investigation has been closed."
+
     end
 
     private
-    def set_unit
-        @unit = Unit.find(params[:id])
+    def set_investigation
+        @investigation = Investigation.find(params[:id])
     end
 
-    def unit_params
-        params.require(:unit).permit(:name, :active)
+    def investigation_params
+        params.require(:investigation).permit(:title, :description, :crime_location, :date_opened, :date_closed, :solved, :batman_involved)
     end
 end
