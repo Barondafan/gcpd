@@ -49,7 +49,7 @@ class CriminalsController < ApplicationController
             flash[:notice] = "Removed #{@criminal.proper_name} from the system."
             redirect_to criminals_path
         else
-            render action: 'index'
+            # render action: 'index'
         end
     end
 

@@ -39,16 +39,16 @@ class CrimesController < ApplicationController
     end
 
     def destroy
-        @crime = Crime.find(params[:id])
-        # @unit.destroy
-        # flash[:notice] = "Removed "
-        # redirect_to unit_path
-        if @crime.destroy
-            flash[:notice] = "Removed #{@crime.name} from the system."
-            redirect_to crimes_path
-        else
-            render action: 'index'
-        end
+        # @crime = Crime.find(params[:id])
+        # # @unit.destroy
+        # # flash[:notice] = "Removed "
+        # # redirect_to unit_path
+        # if @crime.destroy
+        #     flash[:notice] = "Removed #{@crime.name} from the system."
+        #     redirect_to crimes_path
+        # else
+        #     render action: 'index'
+        # end
     end
 
     private
