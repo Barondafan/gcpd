@@ -32,11 +32,16 @@ Rails.application.routes.draw do
     
 
     # Authentication routes
-
+    resources :sessions
+    resources :officers
+    #get 'users/new', to: 'users#new', as: :signup
+    get 'officer/edit', to: 'officers#edit', as: :edit_current_user
+    get 'login', to: 'sessions#new', as: :login
+    get 'logout', to: 'sessions#destroy', as: :logout
     
 
     # Resource routes (maps HTTP verbs to controller actions automatically):
-
+    #resources
   
   
     # Routes for assignments
