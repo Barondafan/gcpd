@@ -47,13 +47,15 @@ Rails.application.routes.draw do
     resources :investigations
     patch 'investigations/:id/close', to: 'investigations#close', as: :close_investigation
   
-  
     # Routes for assignments
-
-    
+    get 'assignments/new', to: 'assignments#new', as: :new_assignment
+    post 'assignments', to: 'assignments#create', as: :assignments
+    patch 'assignments/:id', to: 'assignments#terminate', as: :terminate_assignment
 
     # Routes for crime_investigations
-
+    get 'crime_investigations/new', to: 'crime_investigations#new', as: :new_crime_investigation
+    post 'crime_investigations', to: 'crime_investigations#create', as: :crime_investigations
+    delete 'crime_investigations/:id', to: 'crime_investigations#destroy', as: :remove_crimes
     
 
     # Routes for investigation_notes
