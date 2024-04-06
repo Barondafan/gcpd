@@ -22,6 +22,7 @@
           <div class="actions"><%= f.submit "Log In" %></div>
         <% end %>
       </div>
+      <%= render partial: "partials/flash", locals: {msg: "Username and/or password is invalid"} %>
     </div>
   </div>
 </div>
