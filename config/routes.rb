@@ -59,7 +59,8 @@ Rails.application.routes.draw do
     
 
     # Routes for investigation_notes
-
+    get 'investigation_notes/new', to: 'investigation_notes#new', as: :new_investigation_note
+    post 'investigation_notes', to: 'investigation_notes#create', as: :investigation_notes
     
 
     # Other custom routes
