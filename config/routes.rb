@@ -64,7 +64,9 @@ Rails.application.routes.draw do
     
 
     # Other custom routes
-
+    get 'suspects/new', to: 'suspects#new', as: :new_suspect
+    post 'suspects', to: 'suspects#create', as: :suspects
+    patch 'suspects/:id', to: 'suspects#terminate', as: :terminate_suspect
     
 
     # You can have the root of your site routed with 'root'
