@@ -5,14 +5,20 @@
     <th>Unit</th>
     <th>Active</th>
   </thead>
+  <% if @active_units.nil? %>
+    <p>There are no active units</p>
+  <% else %>
   <% for unit in @active_units %>
     <tr>
       <td><%= link_to unit.name, unit_path(unit) %></td>
       <td><%= unit.active ? 'Yes' : 'No' %></td>
     </tr>
   <% end %>
+  <% end %>
 </table>
 <br />
+<% unless @active_units.nil? %>
 <%= will_paginate @active_units, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+<% end %>
 <p>&nbsp;</p>
 <%= render :partial => "partials/add_new_object", locals: {model_name: 'unit'} %>

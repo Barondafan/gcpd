@@ -3,3 +3,4 @@ ExampleFile,ChatGPT,ExampleMethod,My prompt was… Replace this row with your re
 
 home/index.html.erb, ChatGPT, investigation link, My prompt was Write me a link for investigations (then realized we had partials)
 unit/show.html.erb, ChatGPT, all, My prompt was help me write html code that would satisfy these tests
+units_controller.rb, ChatGPT, @active_units, My prompt was edit this so that if its empty then instead of nil we have the empty list []
