@@ -1,0 +1,55 @@
+<div class="card">
+  <div class="card-content">
+    <h5>Information for <%= @officer.proper_name %></h5><br />
+
+    <b>Current unit:&nbsp;&nbsp;</b>
+    <%= @officer.unit.name %><br /><br />
+
+    <b>Current rank:&nbsp;&nbsp;</b>
+    <%= @officer.rank %><br /><br />
+
+    <b>Active duty?&nbsp;&nbsp;</b>
+    <%= @officer.active? ? 'Yes' : 'No' %><br /><br />
+
+
+    <% if @officer.assignments.current.empty? %>
+        <p>There are no current assignments for this officer</p>
+    <% else %>
+    <p>Current Assignments for <%= @officer.proper_name %></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @officer.assignments.current.each do |assignment| %>
+          <tr>
+            <td><%= assignment.investigation.title %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% end %>
+
+    <% if @officer.assignments.past.empty? %>
+        <p>There are no past assignments for this officer</p>
+    <% else %>
+    <p>Past Assignments for <%= @officer.proper_name %></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @officer.assignments.past.each do |assignment| %>
+          <tr>
+            <td><%= assignment.investigation.title %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+  </div>
+</div>

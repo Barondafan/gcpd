@@ -1,0 +1,24 @@
+<h4>Units in GCPD</h4>
+
+<table class="striped highlight">
+  <thead>
+    <th>Name</th>
+    <th>Rank</th>
+  </thead>
+  <% if @active_officers.nil? %>
+    <p>There are no active officers</p>
+  <% else %>
+  <% for officer in @active_officers %>
+    <tr>
+      <td><%= link_to officer.name, officer_path(officer) %></td>
+      <td><%= officer.rank %></td>
+    </tr>
+  <% end %>
+  <% end %>
+</table>
+<br />
+<% unless @active_officers.nil? %>
+<%= will_paginate @active_officers, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+<% end %>
+<p>&nbsp;</p>
+<%= render :partial => "partials/add_new_object", locals: {model_name: 'officer'} %>
