@@ -3,6 +3,10 @@
   <div class="col s9">
     <div class="card">
       <div class="card-content">
+      <%= render partial: "partials/index_structure", locals: {model_name: "investigation", 
+                                                                primary: "investigations_list", 
+                                                                secondary: nil,
+                                                                sidebar: nil} %>
       </div>
     </div>
   </div>
