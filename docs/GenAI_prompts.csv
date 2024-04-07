@@ -1,4 +1,5 @@
 ﻿File,Tool,Method_Name,Prompt(s)_Used
 ExampleFile,ChatGPT,ExampleMethod,My prompt was… Replace this row with your real first use of Gen AI
 
-home/index.html.erb, ChatGPT, investigation link, My prompt was Write me a link for investigations
+home/index.html.erb, ChatGPT, investigation link, My prompt was Write me a link for investigations (then realized we had partials)
+unit/show.html.erb, ChatGPT, all, My prompt was help me write html code that would satisfy these tests

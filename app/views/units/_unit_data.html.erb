@@ -1,0 +1,28 @@
+<div class="card">
+  <div class="card-content">
+    <h5>Information for <%= @unit.name %></h5><br />
+    <% if @unit.officers.active.empty? %>
+        <p>There are no active officers currently in this unit</p>
+    <% else %>
+    <p>Active Officers in <%= @unit.name %> Unit</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Rank</th>
+          <th>Active Assignments</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @unit.officers.active.each do |officer| %>
+          <tr>
+            <td><%= officer.name %></td>
+            <td><%= officer.rank %></td>
+            <td><%= officer.assignments.current.count %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+  </div>
+</div>

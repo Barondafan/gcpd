@@ -1,0 +1,18 @@
+<h4>Units in GCPD</h4>
+
+<table class="striped highlight">
+  <thead>
+    <th>Unit</th>
+    <th>Active</th>
+  </thead>
+  <% for unit in @active_units %>
+    <tr>
+      <td><%= link_to unit.name, unit_path(unit) %></td>
+      <td><%= unit.active ? 'Yes' : 'No' %></td>
+    </tr>
+  <% end %>
+</table>
+<br />
+<%= will_paginate @active_units, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+<p>&nbsp;</p>
+<%= render :partial => "partials/add_new_object", locals: {model_name: 'unit'} %>
