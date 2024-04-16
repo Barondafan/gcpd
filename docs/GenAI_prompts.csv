@@ -6,4 +6,5 @@ unit/show.html.erb, ChatGPT, all, My prompt was help me write html code that wou
 units_controller.rb, ChatGPT, @active_units, My prompt was edit this so that if its empty then instead of nil we have the empty list []
 officer/show.html.erb, ChatGPT, all, My prompt was help me write html code that would satisfy these tests
 investigation/index.html.erb, ChatGPT, Date_opened, My prompt was how to reformat date from year-month-day to month/day/year in here
+officer/_officer_fields.html.erb, ChatGPT, role input, My prompt was how do I map roles to Officer Chief and Commissioner from <%= f.input :role, collection: Officer.roles.keys, include_blank: true %>
 

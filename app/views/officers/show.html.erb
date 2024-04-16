@@ -1,5 +1,15 @@
-<%= render partial: "partials/show_structure", locals: {model_name: "officer", 
-                                                         object: @officer,
-                                                         primary: "officers_data", 
-                                                         secondary: nil,
-                                                         sidebar: nil} %>
+  <div class="col s9">
+  <%= render partial: "partials/flash"%>
+  <%= render partial: "partials/nav"%>
+    <div class="card">
+      <div class="card-content">
+        <%= render partial: "partials/show_structure", locals: {model_name: "officer", 
+                                                                    object: @officer,
+                                                                    primary: "officers_data", 
+                                                                    secondary: nil,
+                                                                    sidebar: nil} %>
+      <div class="row">
+      </div>
+    </div>
+  </div>
+</div>
