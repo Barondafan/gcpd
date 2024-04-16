@@ -1,4 +1,4 @@
-<div class="card">
+<div id = "stats" class="card">
   <div class="card-content">
     <h5>Officer Information for <%= @officer.proper_name %></h5><br />
 
@@ -13,8 +13,11 @@
 
     <b>Active duty?&nbsp;&nbsp;</b>
     <%= @officer.active? ? 'Yes' : 'No' %><br /><br />
+    </div>
+</div>
 
-
+<div id = "current_assignments" class="card">
+  <div class="card-content">
     <% if @officer.assignments.current.empty? %>
         <p>There are no current assignments for this officer</p>
     <% else %>
@@ -23,18 +26,24 @@
       <thead>
         <tr>
           <th>Name</th>
+          <th>Starting</th>
         </tr>
       </thead>
       <tbody>
         <% @officer.assignments.current.each do |assignment| %>
           <tr>
             <td><%= assignment.investigation.title %></td>
+            <td><%= assignment.start_date %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
     <% end %>
+    </div>
+</div>
 
+<div id = "past_assignments" class="card">
+  <div class="card-content">
     <% if @officer.assignments.past.empty? %>
         <p>There are no past assignments for this officer</p>
     <% else %>
@@ -43,12 +52,14 @@
       <thead>
         <tr>
           <th>Name</th>
+          <th>Ending</th>
         </tr>
       </thead>
       <tbody>
         <% @officer.assignments.past.each do |assignment| %>
           <tr>
             <td><%= assignment.investigation.title %></td>
+            <td><%= assignment.end_date %></td>
           </tr>
         <% end %>
       </tbody>
@@ -56,3 +67,9 @@
   <% end %>
   </div>
 </div>
+
+
+<div class="card-action">
+    <%= link_to "Add a new assignment", new_assignment_path(officer_id: @officer.id) %>
+</div>
+
