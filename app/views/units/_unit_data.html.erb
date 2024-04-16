@@ -1,6 +1,19 @@
-<div class="card">
+<div id="stats" class="card">
   <div class="card-content">
-    <h5>Information for <%= @unit.name %></h5><br />
+    <h5>Statistics for <%= @unit.name %> Unit</h5><br />
+
+    <b>Number of Open Cases:&nbsp;&nbsp;</b>
+    <%= @unit.assignments.map{|assignment| assignment.investigation}.select{|investigation| Investigation.is_open.include? investigation}.uniq.count %><br /><br />
+  
+    <b>Number of Closed Cases:&nbsp;&nbsp;</b>
+    <%= @unit.assignments.map{|assignment| assignment.investigation}.select{|investigation| Investigation.is_closed.include? investigation}.uniq.count %><br /><br />
+
+    <b>Cases Involving Batman:&nbsp;&nbsp;</b>
+    <%= @unit.assignments.map{|assignment| assignment.investigation}.select{|investigation| Investigation.with_batman.include? investigation}.uniq.count %><br /><br />
+   </div>
+</div>
+<div id="officers" class="card">
+  <div class="card-content">
     <% if @unit.officers.active.empty? %>
         <p>There are no active officers currently in this unit</p>
     <% else %>
@@ -14,15 +27,17 @@
         </tr>
       </thead>
       <tbody>
-        <% @unit.officers.active.each do |officer| %>
+        <% @officers.each do |officer| %>
           <tr>
             <td><%= officer.name %></td>
             <td><%= officer.rank %></td>
             <td><%= officer.assignments.current.count %></td>
           </tr>
         <% end %>
-      </tbody>
+        </tbody>
     </table>
+    <%= will_paginate @officers, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>      
   <% end %>
   </div>
 </div>
+

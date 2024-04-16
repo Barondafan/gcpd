@@ -9,7 +9,7 @@ class UnitsController < ApplicationController
     end
 
     def show
-        @officers = @unit.officers.alphabetical.active.to_a
+        @officers = @unit.officers.alphabetical.active.paginate(page: params[:page], per_page: 10)
     end
 
     def new
