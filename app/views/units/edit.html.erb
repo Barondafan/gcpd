@@ -1,0 +1,13 @@
+<div class="row">  
+  <div class="col s9">
+  <%= render partial: "partials/flash"%>
+  <%= render partial: "partials/nav"%>
+    <div class="card">
+      <div class="card-content">
+        <%= render partial: "partials/form_structure", locals: {object: @unit, 
+        type_of_form: "Edit Unit",
+        fields: "unit_fields"} %>
+      </div>
+    </div>
+  </div>
+</div>

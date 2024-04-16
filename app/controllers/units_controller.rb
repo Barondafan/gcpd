@@ -33,7 +33,7 @@ class UnitsController < ApplicationController
     def update
         @unit = Unit.find(params[:id])
         if @unit.update(unit_params)
-          flash[:notice] = "Successfully updated unit by #{@unit.name}."
+          flash[:notice] = "Updated unit information"
           redirect_to @unit
         else
           render action: 'edit'
