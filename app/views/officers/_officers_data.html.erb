@@ -8,6 +8,9 @@
     <b>Current rank:&nbsp;&nbsp;</b>
     <%= @officer.rank %><br /><br />
 
+    <b>SSN:&nbsp;&nbsp;</b>
+    <%= @officer.ssn.insert(3, "-").insert(6, "-") %><br /><br />
+
     <b>Active duty?&nbsp;&nbsp;</b>
     <%= @officer.active? ? 'Yes' : 'No' %><br /><br />
 
