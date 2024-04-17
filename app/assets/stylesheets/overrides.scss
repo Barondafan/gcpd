@@ -8,19 +8,19 @@ html {
   
   /********** TOPBAR & NAV ********/
   #topbar {
-    background-color: black;
+    background-color: #3b3b3b;
     padding-top: 5px;
     margin-bottom: 0px;
-    color: #ffd600;
+    color: #77C3EC;
   }
   
   #nav {
-    background-color: black;
+    background-color: #3b3b3b;
     height: 50px;
   }
   
   #nav ul a {
-    color: #ffd600;
+    color: #77C3EC;
     font-size: 1.2rem;
   }
   
@@ -45,16 +45,16 @@ html {
   /********** FOOTER ********/
   
   #footer {
-    background-color: black;
+    background-color: #3b3b3b;
     padding-top: 10px;
     padding-bottom: 10px;
     margin-bottom: 0px;
-    color: yellow;
+    color: #89CFF0;
     line-height: 2rem;
   }
   
   #footer a {
-    color: #ffd600;
+    color: #77C3EC;
   }
   
   /********** TABLES ********/
@@ -63,11 +63,11 @@ html {
   }
   
   table.striped > tbody > tr:nth-child(even) {
-    background-color: #fffde7;
+    background-color: #EFFEFD;
   }
   
   table.highlight > tbody > tr:hover {
-    background-color: #fff59d;
+    background-color: #B8E2F2;
   }
   
   td.align_right {
@@ -88,12 +88,12 @@ html {
   
   /********** BUTTONS ********/
   .btn {
-    background-color: #ffd600;
+    background-color: #77C3EC;
     color: #000;
   }
   
   .btn:hover {
-    background-color: #ffff00;
+    background-color: #77C3EC;
     color: #000;
   }
   
@@ -118,15 +118,15 @@ html {
   
   /********** FORMS ********/
   .switch label input[type=checkbox]:checked + .lever {
-    background-color: #ffea00;
+    background-color: #89CFF0;
   }
   
   .switch label input[type=checkbox]:checked + .lever::after {
-    background-color: #ffd600;
+    background-color: #77C3EC;
   }
   
   .picker__date-display {
-    background-color: #ffd600;
+    background-color: #77C3EC;
     color: #000;
   }
   
@@ -142,22 +142,22 @@ html {
   .picker__day--selected, .picker__day--selected:hover, .picker--focused .picker__day--selected {
     border-radius: 50%;
     transform: scale(0.9);
-    background-color: #ffd600;
+    background-color: #77C3EC;
     color: #000;
   }
   
   .check_boxes.optional.filled-in {
-    background-color: #ffd600;
+    background-color: #77C3EC;
   }
   
   [type="checkbox"].filled-in:checked+label:after {
-    border: 2px solid #ffd600;
-    background-color: #ffd600;
+    border: 2px solid #77C3EC;
+    background-color: #77C3EC;
   }
   
   [type="radio"]:checked + label:after, [type="radio"].with-gap:checked + label:after {
-    border: 2px solid #ffd600;
-    background-color: #ffd600;
+    border: 2px solid #77C3EC;
+    background-color: #77C3EC;
   }
   
   #form-template {
@@ -182,7 +182,7 @@ html {
   
   /********** CARDS ********/
   .card .card-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
-    color: #ffab00;
+    color: #90EE90;
   }
   
   .remove {
@@ -195,11 +195,11 @@ html {
   
   /********** TABS ********/
   .tabs .tab a.active {
-    color: #ffc400;
+    color: #89CFF0;
   }
   
   .tabs .tab a:hover {
-    color: #ffd600;
+    color: #77C3EC;
   }
   
   .tabs .tab a {
@@ -210,7 +210,7 @@ html {
     position: absolute;
     bottom: 0;
     height: 2px;
-    background-color: #ffd600;
+    background-color: #77C3EC;
     will-change: left, right;
   }
   
