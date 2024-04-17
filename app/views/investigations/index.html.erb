@@ -1,8 +1,12 @@
-<div class="row">  
-  <h4>Open Investigations in GCPD</h4>  
+<div class="row">
+  <div class="col s9">
+  <%= render partial: "partials/flash"%>
+  <%= render partial: "partials/nav"%>
+  <div class="row">  
   <div class="col s9">
     <div class="card">
       <div class="card-content">
+      <h4>Open Investigations in GCPD</h4>  
       <%= render partial: "partials/index_structure", locals: {model_name: "investigation", 
                                                                 primary: "investigations_list", 
                                                                 secondary: nil,
@@ -11,4 +15,8 @@
     </div>
   </div>
 </div>
+</div>
+</div>
+
+
 
