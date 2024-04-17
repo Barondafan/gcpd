@@ -8,7 +8,7 @@
   </thead>
   <% for investigation in @open_investigations %>
     <tr>
-      <td><%= investigation.title %></td>
+      <td><%= link_to investigation.title, investigation_path(investigation) %></td>
       <td><%= investigation.date_opened.strftime('%m/%d/%y') %></td>
     </tr>
   <% end %>
