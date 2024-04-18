@@ -63,12 +63,12 @@ function Crimes({ crimes, investigationId }) {
   }
 
   const content =
-    currentCrimes.length === 0 ? (
+    currentNotes.length === 0 ? (
       <p>This investigation does not yet have crimes associated with it.</p>
     ) : (
       <>
         <ul>
-          {currentCrimes.map((crime) => {
+          {currentNotes.map((note) => {
             const { name, felony } = crime.data.attributes;
             return (
               <li key={`crime-${crime.data.id}`}>

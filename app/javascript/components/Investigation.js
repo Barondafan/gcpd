@@ -4,6 +4,7 @@ import { get } from "../api";
 import InvestigationOverview from "./InvestigationOverview";
 import Crimes from "./Crimes";
 import CurrentAssignments from "./CurrentAssignments";
+import InvestigationNotes from "./InvestigationNotes";
 
 function Investigation({ investigationId }) {
   const [investigation, setInvestigation] = React.useState();
@@ -45,6 +46,14 @@ function Investigation({ investigationId }) {
           {/* third component */}
           <CurrentAssignments 
             assignments={investigationData.current_assignments} />
+          </div>
+
+          <div class="col s6">
+            {/* fourth component */}
+            <InvestigationNotes
+              notes={investigationData.notes}
+              investigationId={investigationId}
+            />
           </div>
       </div>
 
