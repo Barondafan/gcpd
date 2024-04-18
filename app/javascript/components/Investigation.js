@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { get } from "../api";
 import InvestigationOverview from "./InvestigationOverview";
 import Crimes from "./Crimes";
+import CurrentAssignments from "./CurrentAssignments";
 
 function Investigation({ investigationId }) {
   const [investigation, setInvestigation] = React.useState();
@@ -38,7 +39,13 @@ function Investigation({ investigationId }) {
             crimes={investigationData.crimes}
             investigationId={investigationId}
           />
-        </div>  
+        </div> 
+
+        <div class="col s6">
+          {/* third component */}
+          <CurrentAssignments 
+            assignments={investigationData.current_assignments} />
+          </div>
       </div>
 
       
