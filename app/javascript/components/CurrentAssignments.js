@@ -21,7 +21,7 @@ function CurrentAssignments({ assignments }) {
             return (
               <li key={`assignment-${assignment.data.id}`}>
                 <p>
-                  - {rank} {first_name} {last_name} (as of: {FormattedDate(start_date)})
+                  &#x2022; {rank} {first_name} {last_name} (as of: {FormattedDate(start_date)})
                 </p>
               </li>
             );
