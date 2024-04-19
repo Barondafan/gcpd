@@ -6,7 +6,7 @@ function InvestigationOverview({ investigation }) {
 
   return (
     <>
-      <div class="card yellow lighten-5">
+      <div class="card blue lighten-5">
         <div class="card-content">
           <span class="card-title">Investigation Overview</span>
 

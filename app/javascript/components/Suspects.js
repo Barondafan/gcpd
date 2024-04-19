@@ -1,26 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Select from "react-select";
+import AsyncSelect from "react-select";
 import { find } from "lodash";
-import { get, post } from "../api";
+import { get, post, put } from "../api";
 import FormattedDate from "./FormattedDate";
 
-function CrimeEditor({ close, onSave, currentCrimes }) {
+function SuspectEditor({ close, onSave, currentCriminals }) {
   const [options, setOptions] = React.useState([]);
-  const [crimeId, setCrimeId] = React.useState();
+  const [criminalId, setCriminalId] = React.useState();
 
   React.useEffect(() => {
-    get(`/v1/crimes`).then((response) => {
+    get(`/v1/criminals`).then((response) => {
       setOptions(
-        response.crimes.map((crime) => {
-          const crimeAlreadyExists = !!find(currentCrimes, {
-            data: { id: crime.data.id },
+        response.criminals.map((criminal) => {
+          const criminalAlreadyExists = !!find(currentCriminals, {
+            data: { id: criminal.data.id },
           });
-          const { name, felony } = crime.data.attributes;
+          const { first_name, last_name } = criminal.data.attributes;
           return {
-            value: crime.data.id,
-            label: `${name} (${felony ? "felony" : "misdemeanor"})`,
-            disabled: crimeAlreadyExists,
+            value: criminal.data.id,
+            label: `${first_name} ${last_name}`,
+            disabled: criminalAlreadyExists,
           };
         })
       );
@@ -29,12 +29,12 @@ function CrimeEditor({ close, onSave, currentCrimes }) {
 
   return (
     <>
-      <Select
+      <AsyncSelect
         options={options}
-        onChange={({ value }) => setCrimeId(value)}
+        onChange={({ value }) => setCriminalId(value)}
         isOptionDisabled={(option) => option.disabled}
       />
-      <button onClick={() => onSave(crimeId)} disabled={!crimeId}>
+      <button onClick={() => onSave(criminalId)} disabled={!criminalId}>
         Save
       </button>{" "}
       <button onClick={close}>Cancel</button>
@@ -42,10 +42,10 @@ function CrimeEditor({ close, onSave, currentCrimes }) {
   );
 }
 
-CrimeEditor.propTypes = {
+SuspectEditor.propTypes = {
   close: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,
-  currentCrimes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  currentCriminals: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 function Suspects({ suspects, investigationId }) {
@@ -53,14 +53,29 @@ function Suspects({ suspects, investigationId }) {
   const [currentSuspects, setCurrentSuspects] = React.useState(suspects);
 
   function onSave(criminalId) {
-    post(`/v1/investigations/${investigationId}/crime_investigations`, {
-      crime_investigation: {
+    post(`/v1/investigations/${investigationId}/suspects`, {
+      suspect: {
         criminal_id: criminalId,
       },
     }).then((result) => {
       setEditorOpen(false);
-      setCurrentCrimes([result].concat(currentSuspects));
+      setCurrentSuspects([result].concat(currentSuspects));
     });
+  }
+
+  function handleDrop(suspectId) {
+    put(`/v1/drop_suspect/${suspectId}`, {
+        suspect: {
+          suspect_id: suspectId,
+        },}).then((data) => {
+          if (data.errors) {
+            console.log(data.errors);
+          } else {
+            setCurrentSuspects(currentSuspects.map(s => {
+              if (s.data.id === data.data.id){return data} return s
+            }))
+          }
+        });
   }
 
   const content =
@@ -77,8 +92,12 @@ function Suspects({ suspects, investigationId }) {
                 <p> 
                     <i>{first_name} {last_name}</i> <br/>  
                     <ul>
-                        <li>&#x2022; Added: {FormattedDate(added_on)}</li>
-                        <li>&#x2022; Dropped: {dropped_on ? FormattedDate(dropped_on) : "N/A"}</li> 
+                        <li>&#x2022; Added: &nbsp; {FormattedDate(added_on)}</li>
+                        <li>&#x2022; Dropped: &nbsp; {dropped_on ? FormattedDate(dropped_on) : "N/A" } &nbsp; &nbsp; &nbsp; &nbsp;
+                        {!dropped_on && (
+                        <button onClick={() => handleDrop(suspect.data.id)}>Drop</button>
+                        )}
+                        </li> 
                     </ul>
                 </p>
               </li>
@@ -89,11 +108,18 @@ function Suspects({ suspects, investigationId }) {
     );
   return (
     <>
-      <div class="card yellow lighten-5">
+      <div class="card blue lighten-5">
         <div class="card-content">
           <span class="card-title">Suspects</span>
             {content}
-
+            {editorOpen && (
+              <SuspectEditor
+                close={() => setEditorOpen(false)}
+                onSave={onSave}
+                currentCriminals={currentSuspects}
+              />
+            )}
+            {!editorOpen && <button onClick={() => setEditorOpen(true)}>Add</button>}
         </div>
       </div>
     </>
