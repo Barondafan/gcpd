@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import AsyncSelect from "react-select";
+import Select from "react-select";
 import { find } from "lodash";
 import { get, post, put } from "../api";
 import FormattedDate from "./FormattedDate";
@@ -8,28 +8,34 @@ import FormattedDate from "./FormattedDate";
 function SuspectEditor({ close, onSave, currentCriminals }) {
   const [options, setOptions] = React.useState([]);
   const [criminalId, setCriminalId] = React.useState();
-
+  
   React.useEffect(() => {
     get(`/v1/criminals`).then((response) => {
+      const filteredCriminals = response.criminals.filter((criminal) => {
+        return !currentCriminals.some((suspect) => {
+          return (
+            suspect.data.attributes.criminal.data.id === criminal.data.id &&
+            suspect.data.attributes.dropped_on === null 
+          );
+        });
+      });
+  
       setOptions(
-        response.criminals.map((criminal) => {
-          const criminalAlreadyExists = !!find(currentCriminals, {
-            data: { id: criminal.data.id },
-          });
+        filteredCriminals.map((criminal) => {
           const { first_name, last_name } = criminal.data.attributes;
           return {
             value: criminal.data.id,
             label: `${first_name} ${last_name}`,
-            disabled: criminalAlreadyExists,
           };
         })
       );
     });
-  }, []);
+  }, [currentCriminals]); // Include currentCriminals in the dependency array
+  
 
   return (
     <>
-      <AsyncSelect
+      <Select
         options={options}
         onChange={({ value }) => setCriminalId(value)}
         isOptionDisabled={(option) => option.disabled}

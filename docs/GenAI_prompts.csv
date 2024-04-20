@@ -8,5 +8,6 @@ officer/show.html.erb, ChatGPT, all, My prompt was help me write html code that 
 investigation/index.html.erb, ChatGPT, Date_opened, My prompt was how to reformat date from year-month-day to month/day/year in here
 officer/_officer_fields.html.erb, ChatGPT, role input, My prompt was how do I map roles to Officer Chief and Commissioner from <%= f.input :role, collection: Officer.roles.keys, include_blank: true %>
 officer/_officer_data.html.erb, ChatGPT, ssn, My prompt was how to reformat an ssn to have dashes ruby rails
-
+Suspects.js, ChatGPT, React.useEffect(() => {get(`/v1/criminals`).then((response) => ...)}), My prompt was [insert my code]
+So if dropped_on not null, then I want to be able to add them because they have been dropped and I can readd that criminal as a suspect. If it is null, I don't want to be able to add them because they are already a suspect as part of that investigation. 
 
