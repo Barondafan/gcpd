@@ -70,6 +70,8 @@
 
 
 <div class="card-action">
+  <% if can? :new, eval("Assignment") %>
     <%= link_to "Add a new assignment", new_assignment_path(officer_id: @officer.id) %>
+  <% end %>
 </div>
 
